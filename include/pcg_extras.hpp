@@ -626,6 +626,7 @@ private:
 public:
     static constexpr IntType value = fnv(IntType(2166136261U ^ sizeof(IntType)),
                         __DATE__ __TIME__ __FILE__);
+  static_arbitrary_seed() {};
 };
 
 // Sometimes, when debugging or testing, it's handy to be able print the name
