@@ -438,14 +438,14 @@ SrcIter uneven_copy_impl(
     typedef typename std::iterator_traits<SrcIter>::value_type  src_t;
     typedef typename std::iterator_traits<DestIter>::value_type dest_t;
 
-    constexpr auto SRC_SIZE  = sizeof(src_t);
-    constexpr auto SRC_BITS  = SRC_SIZE * 8;
-    constexpr auto DEST_SIZE = sizeof(dest_t);
-    constexpr auto SCALE     = (DEST_SIZE+SRC_SIZE-1) / SRC_SIZE;
+    constexpr std::size_t SRC_SIZE  {sizeof(src_t)};
+    constexpr std::size_t SRC_BITS  {SRC_SIZE * 8};
+    constexpr std::size_t DEST_SIZE {sizeof(dest_t)};
+    constexpr std::size_t SCALE     {(DEST_SIZE+SRC_SIZE-1) / SRC_SIZE};
 
     while (dest_first != dest_last) {
         dest_t value(0UL);
-        unsigned int shift = 0;
+        std::size_t shift = 0;
 
         for (size_t i = 0; i < SCALE; ++i) {
             value |= dest_t(*src_first++) << shift;
